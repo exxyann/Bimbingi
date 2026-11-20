@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>BimbingI — Prototype Interaktif</title>
+<style>
+:root{--em:#0f7a5a;--em2:#0a5c44;--gold:#c9a24b;--navy:#0f1f3a;--bg:#f4f7f6;--card:#fff;--tx:#14213a;--mut:#5b6b7e;--bd:#dce5e1;--hd:#0f1f3a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0a1220;--card:#122039;--tx:#e8eef5;--mut:#9fb0c3;--bd:#233352;--em:#2cb58a;--em2:#1f8f6c;--hd:#071020}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0a1220;--card:#122039;--tx:#e8eef5;--mut:#9fb0c3;--bd:#233352;--em:#2cb58a;--em2:#1f8f6c;--hd:#071020}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--hd);color:#fff;padding:12px 16px}
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:20px;color:var(--gold)}
+.sim{background:var(--gold);color:#0f1f3a;font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px}
+nav{display:flex;gap:6px;overflow-x:auto;margin-top:10px;padding-bottom:2px}
+nav button{white-space:nowrap;background:transparent;border:1px solid #ffffff40;color:#fff;border-radius:99px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+nav button.on{background:var(--em);border-color:var(--em)}
+main{max-width:860px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:12px}
+h2{margin:4px 0 10px;font-size:20px}h3{margin:0 0 6px;font-size:16px}
+.mut{color:var(--mut);font-size:13px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.btn{background:var(--em);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:700;cursor:pointer}
+.btn:disabled{opacity:.45;cursor:not-allowed}.btn.alt{background:transparent;color:var(--em);border:1px solid var(--em)}
+.hero{background:linear-gradient(135deg,var(--em2),var(--navy));color:#fff;border-radius:16px;padding:22px;margin-bottom:12px}
+.hero h2{color:#fff;font-size:24px}.hero .mut{color:#d6e6df}
+.tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:color-mix(in srgb,var(--em) 16%,transparent);color:var(--em);font-weight:700;margin-right:4px}
+.tag.g{background:color-mix(in srgb,var(--gold) 25%,transparent);color:#8a6a1c}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .tag.g{color:var(--gold)}}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--bd)}
+.row:last-child{border:0}
+select,input[type=range],input[type=number]{font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:6px}
+.slot{background:var(--bg);border:1px solid var(--bd);color:var(--tx);border-radius:8px;padding:8px 12px;font:inherit;cursor:pointer;margin:0 6px 6px 0}
+.slot.on{background:var(--em);color:#fff;border-color:var(--em)}
+.kpi{font-size:22px;font-weight:800;color:var(--em)}
+.box{border:1px solid var(--gold);border-radius:12px;padding:12px;background:color-mix(in srgb,var(--gold) 10%,transparent)}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:6px 8px;border-bottom:1px solid var(--bd);text-align:left}
+section{display:none}section.on{display:block}
+</style></head><body>
+<header><div class="top"><span class="logo">BimbingI</span><span class="sim">MODE SIMULASI</span><span class="mut" style="color:#b9c8d6">Dibimbing langsung, amanah jelas · Malang Raya</span></div>
+<nav id="nav"></nav></header>
+<main>
+<section id="home"></section><section id="search"></section><section id="profile"></section><section id="pay"></section><section id="tutor"></section><section id="admin"></section>
+</main>
+<script>
+const R=n=>"Rp "+Math.round(n).toLocaleString("id-ID");
+const T=[
+{id:1,n:"Ustazah Aisyah",k:"mengaji",s:"Tahsin & tahfidz anak",g:"P",d:2.1,r:4.9,p:80000,e:"5 th"},
+{id:2,n:"Ustaz Farid",k:"mengaji",s:"Iqra’ & tajwid dewasa",g:"L",d:4.8,r:4.8,p:75000,e:"7 th"},
+{id:3,n:"Kak Nadia, S.Pd.",k:"akademik",s:"Matematika SD–SMP",g:"P",d:3.4,r:4.7,p:80000,e:"3 th"},
+{id:4,n:"Kak Rizky",k:"akademik",s:"IPA & Fisika SMA",g:"L",d:9.6,r:4.6,p:90000,e:"4 th"},
+{id:5,n:"Ustazah Salma",k:"mengaji",s:"Tahsin remaja putri",g:"P",d:14.2,r:4.8,p:85000,e:"6 th"},
+{id:6,n:"Kak Bima",k:"akademik",s:"Bahasa Inggris SMP–SMA",g:"L",d:17.5,r:4.5,p:70000,e:"2 th"}];
+const SL=["Sen 19.00","Rab 19.30","Jum 16.00","Sab 09.00","Min 10.00"];
+const S={cat:"semua",rad:10,g:"semua",sel:null,slot:null,pm:"QRIS",ok:false,fix:33800000,vc:3800,
+bk:[{n:"Ustazah Aisyah",p:80000,st:"Dicairkan"},{n:"Kak Nadia, S.Pd.",p:80000,st:"Ditahan"}],
+q:[{n:"Ustaz Hafidz",k:"mengaji",ok:0},{n:"Kak Laila",k:"akademik",ok:0}],ver:6};
+const V=[["home","Beranda"],["search","Cari Guru"],["profile","Profil Guru"],["pay","Booking & Bayar"],["tutor","Dashboard Guru"],["admin","Admin & Owner"]];
+function go(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===id));
+document.getElementById("nav").innerHTML=V.map(([i,l])=>`<button class="${i===id?"on":""}" onclick="go('${i}')">${l}</button>`).join("");render(id);scrollTo(0,0)}
+const $=id=>document.getElementById(id);
+function render(id){({home,search,profile,pay,tutor,admin})[id]()}
+function home(){$("home").innerHTML=`<div class="hero"><h2>Guru mengaji & tutor privat terverifikasi, akadnya jelas.</h2><p class="mut">Booking tiga ketukan: kategori → guru → jadwal & bayar. Dana ditahan sebagai amanah sampai sesi selesai.</p><button class="btn" style="background:var(--gold);color:#0f1f3a" onclick="S.cat='semua';go('search')">Cari guru sekarang</button></div>
+<div class="grid"><div class="card"><h3>📖 Guru Mengaji</h3><p class="mut">Tahsin, tahfidz, Iqra’. Lolos tes baca Al-Qur’an.</p><button class="btn alt" onclick="S.cat='mengaji';go('search')">Lihat</button></div>
+<div class="card"><h3>🎓 Les Akademik</h3><p class="mut">SD–SMA, di rumah atau online.</p><button class="btn alt" onclick="S.cat='akademik';go('search')">Lihat</button></div>
+<div class="card"><h3>🤝 Akad Transparan</h3><p class="mut">Ijarah (guru) + Wakalah bil Ujrah (platform), tampil sebelum bayar.</p></div></div>`}
+function list(){return T.filter(t=>(S.cat==="semua"||t.k===S.cat)&&t.d<=S.rad&&(S.g==="semua"||t.g===S.g))}
+function search(){const L=list();$("search").innerHTML=`<h2>Cari guru</h2><div class="card"><div class="row"><span>Kategori</span><select onchange="S.cat=this.value;search()">${["semua","mengaji","akademik"].map(c=>`<option ${S.cat===c?"selected":""}>${c}</option>`).join("")}</select></div>
+<div class="row"><span>Radius: <b>${S.rad} km</b></span><input type="range" min="1" max="20" value="${S.rad}" oninput="S.rad=+this.value;search()"></div>
+<div class="row"><span>Jenis kelamin guru</span><select onchange="S.g=this.value;search()"><option value="semua">Semua</option><option value="P" ${S.g==="P"?"selected":""}>Ustazah / guru putri</option><option value="L" ${S.g==="L"?"selected":""}>Ustaz / guru putra</option></select></div></div>
+${L.length?L.map(t=>`<div class="card"><div class="row"><div><h3>${t.n}</h3><span class="tag">${t.k}</span><span class="tag g">✔ Terverifikasi</span><div class="mut">${t.s} · ${t.d} km · ★ ${t.r}</div></div><div style="text-align:right"><b>${R(t.p)}</b><div class="mut">/sesi</div><button class="btn" onclick="S.sel=${t.id};S.slot=null;go('profile')">Profil</button></div></div></div>`).join(""):`<div class="card mut">Belum ada guru pada filter ini. Perlebar radius.</div>`}`}
+function profile(){const t=T.find(x=>x.id===S.sel);if(!t){$("profile").innerHTML=`<div class="card">Pilih guru dulu dari halaman Cari Guru.</div>`;return}
+$("profile").innerHTML=`<h2>${t.n}</h2><div class="card"><span class="tag">${t.k}</span><span class="tag g">KTP ✔</span><span class="tag g">Tes baca Al-Qur’an ✔</span><p>${t.s}. Pengalaman ${t.e}. Jarak ${t.d} km · rating ★ ${t.r}.</p><p class="mut">Sesi perkenalan tersedia. Jika guru batal sepihak, platform membantu mencarikan pengganti.</p>
+<h3>Pilih jadwal</h3>${SL.map(s=>`<button class="slot ${S.slot===s?"on":""}" onclick="S.slot='${s}';profile()">${s}</button>`).join("")}<div style="margin-top:10px"><button class="btn" ${S.slot?"":"disabled"} onclick="S.ok=false;go('pay')">Lanjut ke pembayaran</button></div></div>`}
+function pay(){const t=T.find(x=>x.id===S.sel);if(!t||!S.slot){$("pay").innerHTML=`<div class="card">Pilih guru dan jadwal dulu.</div>`;return}
+const u=t.p*.15;$("pay").innerHTML=`<h2>Booking & pembayaran</h2><div class="card"><div class="row"><span>${t.n} · ${S.slot}</span><b>${R(t.p)}</b></div>
+<div class="box"><h3>Rincian akad (draf, menunggu telaah DPS)</h3>
+<div class="row"><span>Jasa mengajar — <i>Ijarah</i></span><span>${R(t.p)}</span></div>
+<div class="row"><span>Ujrah platform 15% — <i>Wakalah bil Ujrah</i> (ditanggung guru)</span><span>${R(u)}</span></div>
+<div class="row"><span>Diterima guru (85%)</span><span>${R(t.p-u)}</span></div>
+<div class="row"><span>Biaya tambahan untuk Anda</span><b>Rp 0</b></div>
+<p class="mut">Dana berstatus “Ditahan (Amanah Wakalah)” dan baru dicairkan setelah sesi selesai. Tidak ada riba, denda keterlambatan, atau undian berbayar.</p></div>
+<h3 style="margin-top:12px">Metode bayar</h3>${["QRIS","Virtual Account","E-wallet"].map(m=>`<label style="margin-right:14px"><input type="radio" name="pm" ${S.pm===m?"checked":""} onchange="S.pm='${m}'"> ${m}</label>`).join("")}
+<p class="mut">QRIS: MDR 0% untuk transaksi ≤ Rp100.000 sejak 1 Okt 2026 (BI); biaya gateway tetap perlu dikonfirmasi ke penyedia.</p>
+<label><input type="checkbox" ${S.ok?"checked":""} onchange="S.ok=this.checked;pay()"> Saya memahami dan menyetujui akad di atas.</label>
+<div style="margin-top:10px"><button class="btn" ${S.ok?"":"disabled"} onclick="S.bk.push({n:'${t.n}',p:${t.p},st:'Ditahan'});S.slot=null;S.ok=false;alert('Pembayaran simulasi berhasil. Dana ditahan sebagai amanah.');go('tutor')">Bayar ${R(t.p)}</button></div></div>`}
+function tutor(){const net=S.bk.filter(b=>b.st==="Dicairkan").reduce((a,b)=>a+b.p*.85,0);
+$("tutor").innerHTML=`<h2>Dashboard guru</h2><div class="grid"><div class="card"><div class="mut">Sudah dicairkan</div><div class="kpi">${R(net)}</div></div><div class="card"><div class="mut">Sesi menunggu</div><div class="kpi">${S.bk.filter(b=>b.st==="Ditahan").length}</div></div></div>
+<div class="card">${S.bk.map((b,i)=>`<div class="row"><div><b>${b.n}</b><div class="mut">${R(b.p)} · guru menerima ${R(b.p*.85)}</div></div>${b.st==="Ditahan"?`<span><span class="tag g">Ditahan (Amanah)</span><button class="btn" onclick="S.bk[${i}].st='Dicairkan';tutor()">Sesi selesai</button></span>`:`<span class="tag">Dicairkan</span>`}</div>`).join("")}</div>`}
+function admin(){const g=S.bk.reduce((a,b)=>a+b.p,0),uj=S.bk.filter(b=>b.st==="Dicairkan").reduce((a,b)=>a+b.p*.15,0),am=S.bk.filter(b=>b.st==="Ditahan").reduce((a,b)=>a+b.p,0),c=80000*.15-S.vc,bep=S.fix/c;
+$("admin").innerHTML=`<h2>Admin & Owner</h2><div class="grid"><div class="card"><div class="mut">GMV (simulasi)</div><div class="kpi">${R(g)}</div></div><div class="card"><div class="mut">Ujrah diakui</div><div class="kpi">${R(uj)}</div></div><div class="card"><div class="mut">Dana amanah ditahan</div><div class="kpi">${R(am)}</div></div><div class="card"><div class="mut">Guru terverifikasi</div><div class="kpi">${S.ver}</div></div></div>
+<div class="card"><h3>Antrian verifikasi guru</h3>${S.q.length?S.q.map((x,i)=>`<div class="row"><span>${x.n} <span class="tag">${x.k}</span></span><button class="btn" onclick="S.q.splice(${i},1);S.ver++;admin()">Setujui (KTP + tes baca)</button></div>`).join(""):`<span class="mut">Antrian kosong.</span>`}</div>
+<div class="card"><h3>Simulator titik impas (AOV Rp80.000, ujrah 15%)</h3>
+<div class="row"><span>Biaya tetap + pemasaran / bulan: <b>${R(S.fix)}</b></span><input type="range" min="15000000" max="50000000" step="1000000" value="${S.fix}" oninput="S.fix=+this.value;admin()"></div>
+<div class="row"><span>Biaya variabel / booking: <b>${R(S.vc)}</b></span><input type="range" min="2500" max="5000" step="100" value="${S.vc}" oninput="S.vc=+this.value;admin()"></div>
+<button class="btn alt" onclick="S.vc=3240;admin()">Terapkan MDR QRIS 0% (hemat ±Rp560/booking)</button>
+<p>Kontribusi ${R(c)}/booking → BEP <span class="kpi">${Math.ceil(bep).toLocaleString("id-ID")}</span> booking/bulan (GMV ±${R(Math.ceil(bep)*80000)}).</p></div>
+<div class="card"><h3>Pembaruan data (20 Nov 2026)</h3><div class="scroll"><table><tr><th>Item</th><th>Di deck</th><th>Data terbaru</th></tr>
+<tr><td>Penduduk Malang Raya</td><td>3,89 jt (proyeksi 2026)</td><td>±3,84 jt: Kota Malang 894 rb (2025), Kota Batu 217 rb (2025), Kab. Malang 2,73 jt (2024)</td></tr>
+<tr><td>Harga Ruangguru Privat</td><td>Rp180–275 rb/sesi</td><td>Rp175–207,5 rb/sesi 90 menit; ada paket mulai Rp70 rb/jam</td></tr>
+<tr><td>MDR QRIS</td><td>0,7%</td><td>0% untuk transaksi ≤ Rp100 rb (sejak 1 Okt 2026)</td></tr>
+<tr><td>Fatwa DSN-MUI</td><td>112, 113, 116/2017</td><td>Tambahkan 144/2021 (Marketplace) dan 10/2000 (Wakalah); telaah DPS</td></tr></table></div></div>`}
+go("home");
+</script></body></html>
